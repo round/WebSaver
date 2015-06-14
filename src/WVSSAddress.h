@@ -1,8 +1,8 @@
 //
-//  WebViewScreenSaverView.h
+//  WVSSAddress.h
 //  WebViewScreenSaver
 //
-//  Created by Alastair Tse on 8/8/10.
+//  Created by Alastair Tse on 26/04/2015.
 //
 //  Copyright 2015 Alastair Tse.
 //
@@ -19,20 +19,21 @@
 //  limitations under the License.
 //
 
-// Codesign:
-// http://www.wurst-wasser.net/wiki/index.php/How_To_codesign_a_Screen_Saver_for_Yosemite
-
 #import <Foundation/Foundation.h>
-#import <ScreenSaver/ScreenSaver.h>
-#import <WebKit/WebKit.h>
-#import "WVSSConfigController.h"
 
-// A simple screen saver that is a configurable webview driven from a list
-// of URLs.
-@interface WebViewScreenSaverView : ScreenSaverView
+extern NSString * const kWVSSAddressURLKey;
+extern NSString * const kWVSSAddressTimeKey;
 
-@property (nonatomic, strong) WVSSConfigController *configController;
+@interface WVSSAddress : NSObject
+@property(nonatomic, strong) NSString *url;
+@property(nonatomic, assign) NSInteger duration;
 
-- (id)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview prefsStore:(NSUserDefaults *)prefs;
++ (NSString *)defaultAddressURL;
++ (NSInteger)defaultDuration;
+
++ (WVSSAddress *)addressWithURL:(NSString *)url duration:(NSInteger)duration;
++ (WVSSAddress *)defaultAddress;
+
+- (NSDictionary *)dictionaryRepresentation;
 
 @end
